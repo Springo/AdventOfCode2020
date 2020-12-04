@@ -9,6 +9,18 @@ def readFile(filename):
 lines = readFile("test_assembly_input.txt")
 
 
+def parse_val(reg, val):
+    if val.isnumeric():
+        try:
+            val = int(val)
+            return val
+        except:
+            val = float(val)
+            return val
+    else:
+        return get_val(reg, val)
+
+
 def get_val(reg, key):
     if key not in reg:
         reg[key] = 0
