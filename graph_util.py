@@ -21,6 +21,23 @@ def _top_sort_helper(adj_list, v, visited, stack):
     stack.append(v)
 
 
+def bfs(adj_list, key, target):
+    explored = dict()
+    q = [(key, 0)]
+    explored[key] = True
+    while len(q) > 0:
+        item, dist = q.pop(0)
+        for cur in adj_list[item]:
+            _, id = cur
+            if id == target:
+                return dist + 1
+
+            if id not in explored:
+                q.append((id, dist + 1))
+                explored[id] = True
+    return -1
+
+
 if __name__ == "__main__":
     adj_list = dict()
     adj_list['x'] = ['y']
