@@ -1,9 +1,15 @@
-def convert_to_grid(lines):
+def convert_to_grid(lines, convert_numeric=True):
     grid = []
     for line in lines:
         l = []
         for c in line:
-            l.append(c)
+            val = c
+            if convert_numeric and c.isnumeric():
+                try:
+                    val = int(c)
+                except:
+                    val = float(c)
+            l.append(val)
         grid.append(l)
 
     return grid
