@@ -62,7 +62,6 @@ for id in adj_list:
     for ori in adj_list[id]:
         total_bord += len(adj_list[id][ori])
     if total_bord == 4:
-        print(id)
         ans *= id
         first = id
 print(ans)
@@ -122,7 +121,6 @@ for j in range(11):
 image.append(row1)
 image_ids.append(id_list1)
 
-print(id_list1)
 last_above = first
 above_ind_last = 'D'
 for i in range(11):
@@ -235,6 +233,7 @@ for flip in range(2):
         real_image = rot_tile(real_image, 1)
     real_image = flip_tile(real_image)
 
+real_image = flip_tile(rot_tile(real_image, 1))
 
 total = 0
 for row in real_image:
