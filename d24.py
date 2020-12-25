@@ -46,8 +46,9 @@ for line in lines:
                 x -= 1
 
     if (x, y) not in flipped:
-        flipped[(x, y)] = False
-    flipped[(x, y)] = not flipped[(x, y)]
+        flipped[(x, y)] = True
+    else:
+        del flipped[(x, y)]
 
 total = 0
 for flip in flipped:
@@ -61,21 +62,19 @@ for iter in range(100):
     adj_tiles = dict()
     new_flipped = deepcopy(flipped)
     for flip in flipped:
-        if flipped[flip]:
-            x, y = flip
-            for neigh in neighbs:
-                new_x, new_y = neigh
-                new_x = new_x + x
-                new_y = new_y + y
-                adj_tiles[(new_x, new_y)] = adj_tiles.get((new_x, new_y), 0) + 1
+        x, y = flip
+        for neigh in neighbs:
+            new_x, new_y = neigh
+            new_x = new_x + x
+            new_y = new_y + y
+            adj_tiles[(new_x, new_y)] = adj_tiles.get((new_x, new_y), 0) + 1
 
     for flip in flipped:
-        if flipped[flip]:
-            if flip not in adj_tiles or adj_tiles[flip] > 2:
-                new_flipped[flip] = False
+        if flip not in adj_tiles or adj_tiles[flip] > 2:
+            del new_flipped[flip]
 
     for tile in adj_tiles:
-        if tile not in flipped or not flipped[tile]:
+        if tile not in flipped:
             if adj_tiles[tile] == 2:
                 new_flipped[tile] = True
 
